@@ -1,0 +1,42 @@
+schema_version: "1.0"
+
+extension:
+  id: "rfc"
+  name: "RFC Creator"
+  version: "1.0.0"
+  description: "Create technical RFCs (Request for Comments) from feature specs. RFCs capture architectural decisions and trade-offs between spec and plan."
+  author: "spec-kit-core"
+  repository: "https://github.com/github/spec-kit"
+  license: "MIT"
+  homepage: "https://github.com/github/spec-kit/tree/main/extensions/rfc"
+
+requires:
+  speckit_version: ">=0.2.0"
+  commands:
+    - "speckit.specify"
+
+provides:
+  commands:
+    - name: "speckit.rfc.create"
+      file: "commands/create.md"
+      description: "Create a technical RFC from an existing feature spec, proposing HOW to build it."
+      aliases: ["speckit.rfc"]
+
+  templates:
+    - name: "rfc-template"
+      file: "templates/rfc-template.md"
+      description: "RFC document template with Decision Summary, Alternatives Considered, and discipline guidelines."
+
+hooks:
+  after_specify:
+    command: "speckit.rfc.create"
+    optional: true
+    prompt: "Create a technical RFC for this spec?"
+    description: "Generate an RFC capturing architectural decisions after spec creation."
+
+tags:
+  - "rfc"
+  - "architecture"
+  - "decision-record"
+  - "technical-design"
+  - "workflow"
